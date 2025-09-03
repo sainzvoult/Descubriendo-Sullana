@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Descubriendo Sullana - Juegos Interactivos</title>
+<style>
+body { font-family: Arial, sans-serif; margin:0; padding:0; background: linear-gradient(to bottom, #f0f8ff, #d0e8ff); color:#333; }
+header { background:#1a5276; color:#fff; padding:25px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.3);}
+h1,h2,h3{ color:#1a5276; margin-bottom:10px; }
+section { margin:25px auto; padding:25px; max-width:1000px; background:#fff; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.1);}
+.game { margin-top:30px; padding:20px; border-radius:15px; animation:fadeIn 1s; }
+button { background:#3498db; color:#fff; border:none; padding:8px 15px; margin:5px; border-radius:5px; cursor:pointer; transition:0.3s; }
+button:hover{ background:#2980b9;}
+input { padding:5px; margin-right:5px; border-radius:5px; border:1px solid #ccc; }
+#found-words { font-weight:bold; color:#27ae60;}
+.sopa { display:grid; grid-template-columns: repeat(12,35px); gap:2px; margin-top:10px;}
+.sopa div{ width:35px; height:35px; text-align:center; line-height:35px; border:1px solid #ccc; cursor:pointer; user-select:none; font-weight:bold; font-size:18px; transition:0.3s;}
+.found{ background:#27ae60; color:#fff;}
+#crucigrama-grid{ display:grid; grid-template-columns: repeat(12,35px); gap:2px; margin-top:10px;}
+#crucigrama-grid input{ width:35px; height:35px; text-align:center; text-transform:uppercase; font-weight:bold; font-size:18px;}
+.memorama{ display:grid; grid-template-columns: repeat(4, 100px); gap:10px; margin-top:10px; }
+.card{ width:100px; height:100px; perspective:1000px; cursor:pointer; }
+.card-inner{ position:relative; width:100%; height:100%; text-align:center; transition: transform 0.6s; transform-style: preserve-3d; }
+.card.flipped .card-inner{ transform: rotateY(180deg); }
+.card-front, .card-back{ position:absolute; width:100%; height:100%; backface-visibility:hidden; border-radius:10px; display:flex; justify-content:center; align-items:center; font-size:14px; font-weight:bold; text-align:center; padding:5px; box-sizing:border-box;}
+.card-front{ background:#3498db; color:#fff; }
+.card-back{ background:#fff; color:#333; transform:rotateY(180deg); border:1px solid #ccc; }
+.ordenable{ padding:10px; margin:5px; background:#f5b7b1; border-radius:8px; cursor:pointer; user-select:none;}
+#ordenable-container{ display:flex; flex-direction:column; max-width:600px; margin:10px 0;}
+@keyframes fadeIn{ from{opacity:0;} to{opacity:1;}}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Descubriendo Sullana</h1>
+<p>Aprende y diviértete con la historia y cultura de Sullana</p>
+</header>
+
+<section id="informacion">
+<h2>Información General</h2>
+<p><strong>Ubicación geográfica:</strong> Sullana se encuentra en el norte de Perú, región Piura, dentro del valle del río Chira. Coordenadas aproximadas: -4.8990° S, -80.6800° O. Limita con Piura, Talara y Ecuador al norte.</p>
+
+<h2>Origen y Fundación</h2>
+<p>Fundada oficialmente en 1783, Sullana se destacó por su posición estratégica para comercio y agricultura en el valle del Chira. Con la llegada de los españoles se construyeron plazas, iglesias y puentes que aún forman parte del patrimonio cultural.</p>
+
+<h2>Desarrollo Histórico</h2>
+<p>Durante la época republicana, Sullana creció como centro agrícola y comercial, consolidándose como capital de la provincia con infraestructura urbana y centros educativos. La ciudad se convirtió en un punto clave para la exportación de productos agrícolas del norte.</p>
+
+<h2>Culturas Antiguas</h2>
+<h3>Tallanes</h3>
+<p>Los Tallanes eran agricultores, pescadores y comerciantes, con fuerte conexión espiritual con la naturaleza. Destacaban por su organización comunitaria y ritos ceremoniales.</p>
+<h3>Capullanas</h3>
+<ul>
+<li><strong>Liderazgo político:</strong> Administraban recursos y organización comunitaria.</li>
+<li><strong>Autoridad espiritual:</strong> Dirigían ceremonias y rituales religiosos.</li>
+<li><strong>Vestimenta y símbolos:</strong> Indicaban rango y poder.</li>
+<li><strong>Influencia social:</strong> Su palabra era respetada en la comunidad.</li>
+<li><strong>Mito:</strong> La Capullana de Amotape, protectora del valle del Chira.</li>
+</ul>
+
+<h2>Economía y Sociedad</h2>
+<p>Agricultura (maíz, arroz, algodón), ganadería, comercio y servicios. Religión predominante: católica.</p>
+
+<h2>Tradiciones y Festividades</h2>
+<ul>
+<li>Fiesta de La Merced</li>
+<li>Aniversario de Sullana</li>
+<li>Ferias de artesanía, Tondero y gastronomía típica</li>
+</ul>
+
+<h2>Manifestaciones Culturales</h2>
+<p>Danzas como el Tondero, música tradicional, artesanía en tejidos y cerámica, festivales de gastronomía local.</p>
+
+<h2>Monumentos Destacados</h2>
+<p>Plaza de Armas, Iglesia Matriz, Puente Viejo y otras edificaciones históricas.</p>
+
+<h2>Gastronomía y Dulces</h2>
+<ul>
+<li>Ceviche de mero</li>
+<li>Seco de chabelo</li>
+<li>Tamalitos verdes</li>
+<li>Mazamorra morada, alfajores</li>
+</ul>
+
+<h2>Flora y Fauna</h2>
+<p>Manglares, aves, crustáceos, peces, conejos, loros y vegetación ribereña.</p>
+
+<h2>Mitos y Leyendas</h2>
+<p>La Capullana de Amotape y los Tallanes, así como relatos sobre los orígenes del valle del Chira.</p>
+
+<h2>Escritores Sullaneros</h2>
+<p>Autores antiguos y modernos que documentan historia y cultura local, incluyendo relatos sobre las tradiciones y festividades.</p>
+</section>
+
+<!-- Juegos -->
+<section class="game" id="word-connect" style="background:#f9e79f;">
+<h2>Juego 1: Conecta Palabras</h2>
+<p>Escribe palabras relacionadas con Sullana:</p>
+<input type="text" id="word-input" placeholder="Escribe una palabra">
+<button onclick="checkWord()">Comprobar</button>
+<p id="word-result"></p>
+<p>Palabras encontradas: <span id="found-words"></span></p>
+</section>
+
+<section class="game" id="sopa" style="background:#abebc6;">
+<h2>Juego 2: Sopa de Letras</h2>
+<p>Selecciona las letras para encontrar las palabras culturales:</p>
+<p>Palabras: Chira, Ceviche, Plaza, Manglares, Tradición, Cultura, Iglesia</p>
+<div class="sopa" id="sopa-grid"></div>
+</section>
+
+<section class="game" id="crucigrama" style="background:#aed6f1;">
+<h2>Juego 3: Crucigrama Cultural</h2>
+<p>Completa las palabras según las pistas:</p>
+<ul>
+<li>"Puente histórico sobre el río Chira" → 11 letras</li>
+<li>"Fiesta patronal en honor a la Virgen..." → 8 letras</li>
+<li>"Danza típica del norte" → 7 letras</li>
+</ul>
+<div id="crucigrama-grid"></div>
+<button onclick="checkCrucigrama()">Comprobar Crucigrama</button>
+<p id="crucigrama-result"></p>
+</section>
+
+<section class="game" id="memorama" style="background:#f9e79f;">
+<h2>Juego 4: Memorama Cultural</h2>
+<p>Haz match entre el nombre y su descripción correspondiente:</p>
+<div class="memorama" id="memorama-grid"></div>
+<p id="memorama-score"></p>
+</section>
+
+<section class="game" id="ordena" style="background:#f5b7b1;">
+<h2>Juego 5: Ordena la Historia</h2>
+<p>Usa los botones ↑↓ para mover los eventos y ponerlos en el orden correcto:</p>
+<div id="ordenable-container"></div>
+<button onclick="checkOrden()">Comprobar Orden</button>
+<p id="orden-result"></p>
+</section>
+
+<script>
+// ===== CONECTA PALABRAS =====
+let words = ["PUENTE VIEJO","PLAZA DE ARMAS","IGLESIA MATRIZ","RIO CHIRA","MANGLARES","SECHURA","FESTIVIDADES","TONDERO","CEVICHE","SECO DE CHABELO","TALLANES","CAPULLANAS","LA MERCED"];
+let foundWords = [];
+function checkWord(){
+    let input = document.getElementById('word-input').value.trim().toUpperCase();
+    if(words.includes(input) && !foundWords.includes(input)){
+        foundWords.push(input);
+        document.getElementById('word-result').innerText = "¡Correcto!";
+        document.getElementById('found-words').innerText = foundWords.join(", ");
+    } else if(foundWords.includes(input)){
+        document.getElementById('word-result').innerText = "Ya encontraste esa palabra.";
+    } else {
+        document.getElementById('word-result').innerText = "Incorrecto, intenta otra.";
+    }
+    document.getElementById('word-input').value = "";
+}
+
+// ===== SOPA DE LETRAS =====
+let sopaWords = ["CHIRA","CEVICHE","PLAZA","MANGLARES","TRADICION","CULTURA","IGLESIA"];
+let gridSize = 12;
+let sopaGrid = document.getElementById('sopa-grid');
+let sopaCells = [];
+for(let i=0;i<gridSize*gridSize;i++){
+    let cell = document.createElement('div');
+    let letter = String.fromCharCode(65 + Math.floor(Math.random()*26));
+    cell.innerText = letter;
+    cell.addEventListener('click', ()=>{ cell.classList.toggle('found'); });
+    sopaGrid.appendChild(cell);
+    sopaCells.push(cell);
+}
+sopaWords.forEach((w,row)=>{
+    for(let i=0;i<w.length;i++){
+        sopaCells[row*gridSize + i].innerText = w[i];
+    }
+});
+
+// ===== CRUCIGRAMA =====
+let crucigramaWords = [
+    {word:"PUENTEVIEJO",row:0,col:0,h:true},
+    {word:"LAMERCED",row:2,col:0,h:true},
+    {word:"TONDERO",row:4,col:0,h:true}
+];
+let crucigramaGrid = document.getElementById('crucigrama-grid');
+for(let r=0;r<12;r++){
+    for(let c=0;c<12;c++){
+        let input = document.createElement('input');
+        input.maxLength = 1;
+        crucigramaGrid.appendChild(input);
+    }
+}
+function checkCrucigrama(){
+    let inputs = crucigramaGrid.getElementsByTagName('input');
+    let correct = 0;
+    crucigramaWords.forEach(obj=>{
+        for(let i=0;i<obj.word.length;i++){
+            let idx = obj.row*12 + (obj.h? i : 0) + (obj.h?0:i*12);
+            if(inputs[idx].value.toUpperCase() === obj.word[i]){
+                correct++;
+            }
+        }
+    });
+    document.getElementById('crucigrama-result').innerText = "Letras correctas: "+correct+"/"+(crucigramaWords.reduce((a,b)=>a+b.word.length,0));
+}
+
+// ===== MEMORAMA CORREGIDO =====
+let cardPairs = [
+    {name:"Ceviche",desc:"Plato típico de pescado marinado"},
+    {name:"Seco de chabelo",desc:"Guiso tradicional con plátano y carne"},
+    {name:"Plaza de Armas",desc:"Lugar central de Sullana"},
+    {name:"Iglesia Matriz",desc:"Iglesia principal de la ciudad"}
+];
+let memoramaGrid = document.getElementById('memorama-grid');
+let firstCard=null;
+let score=0;
+let cardsArray=[];
+cardPairs.forEach(p=>{
+    cardsArray.push({type:"name",text:p.name,id:p.name});
+    cardsArray.push({type:"desc",text:p.desc,id:p.name});
+});
+cardsArray.sort(()=>Math.random()-0.5);
+cardsArray.forEach(c=>{
+    let div=document.createElement('div'); div.className="card";
+    div.innerHTML=`<div class="card-inner">
+        <div class="card-front">?</div>
+        <div class="card-back">${c.text}</div>
+    </div>`;
+    div.dataset.id=c.id;
+    div.dataset.type=c.type;
+    div.addEventListener('click',()=>{
+        if(div.classList.contains('flipped')) return;
+        div.classList.add('flipped');
+        if(!firstCard){ firstCard=div; }
+        else{
+            if(firstCard.dataset.id===div.dataset.id && firstCard.dataset.type!==div.dataset.type){
+                score++;
+                firstCard=null;
+            } else{
+                setTimeout(()=>{ firstCard.classList.remove('flipped'); div.classList.remove('flipped'); firstCard=null; },1000);
+            }
+        }
+        document.getElementById('memorama-score').innerText="Parejas encontradas: "+score+"/"+cardPairs.length;
+    });
+    memoramaGrid.appendChild(div);
+});
+
+// ===== ORDENA LA HISTORIA =====
+let events = [
+    "Fundación oficial en 1783",
+    "Llegada de los españoles y construcción de plazas e iglesias",
+    "Desarrollo agrícola y comercial en la época republicana",
+    "Festividades modernas como La Merced y aniversario de Sullana"
+];
+let container=document.getElementById('ordenable-container');
+let eventsDesordenados=[...events];
+eventsDesordenados.sort(()=>Math.random()-0.5);
+function crearEventos(){
+    container.innerHTML='';
+    eventsDesordenados.forEach((e,index)=>{
+        let div=document.createElement('div'); div.className="ordenable";
+        div.innerHTML=`<button onclick="mover(${index},-1)">↑</button>
+        <button onclick="mover(${index},1)">↓</button> ${e}`;
+        container.appendChild(div);
+    });
+}
+function mover(index,dir){
+    let temp=eventsDesordenados[index];
+    let newIndex=index+dir;
+    if(newIndex<0 || newIndex>=eventsDesordenados.length) return;
+    eventsDesordenados[index]=eventsDesordenados[newIndex];
+    eventsDesordenados[newIndex]=temp;
+    crearEventos();
+}
+function checkOrden(){
+    let correct=0;
+    for(let i=0;i<events.length;i++){
+        if(eventsDesordenados[i]===events[i]) correct++;
+    }
+    document.getElementById('orden-result').innerText="Eventos en el orden correcto: "+correct+"/"+events.length;
+}
+crearEventos();
+</script>
+
+</body>
+</html>
